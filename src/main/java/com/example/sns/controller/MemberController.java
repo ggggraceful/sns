@@ -1,6 +1,6 @@
 package com.example.sns.controller;
 
-import com.example.sns.dto.request.MemberReqDto;
+import com.example.sns.dto.request.SignUpReqDto;
 import com.example.sns.service.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -18,8 +18,8 @@ public class MemberController {
 
 	// 회원가입
 	@PostMapping("/signup")
-	public ResponseEntity<Void> registerMember(@RequestBody @Valid MemberReqDto memberReqDto){
-		memberService.signup(memberReqDto);
+	public ResponseEntity<Void> registerMember(@RequestBody @Valid SignUpReqDto signUpReqDto){
+		memberService.signup(signUpReqDto);
 		return ResponseEntity.status(HttpStatus.OK.value()).body(null);
 	}
 }

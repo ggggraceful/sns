@@ -1,7 +1,7 @@
 package com.example.sns.service;
 
 import com.example.sns.domain.user.Member;
-import com.example.sns.dto.request.MemberReqDto;
+import com.example.sns.dto.request.SignUpReqDto;
 import com.example.sns.error.customException.memberException.MemberEamilAlreadyExistsException;
 import com.example.sns.error.customException.memberException.WrongPasswordCornfirmException;
 import com.example.sns.repository.MemberRepository;
@@ -19,23 +19,23 @@ public class MemberService {
 
 	//회원가입
 	@Transactional
-	public void signup(MemberReqDto memberReqDto) {
+	public void signup(SignUpReqDto signUpReqDto) {
 
-		validateMemberSignUpInfo(memberReqDto);
-		memberReqDto.setPassword(passwordEncoder.encode(memberReqDto.getPassword()));
+		validateMemberSignUpInfo(signUpReqDto);
+		signUpReqDto.setPassword(passwordEncoder.encode(signUpReqDto.getPassword()));
 
 		Member member = Member.builder()
-				.email(memberReqDto.getEmail())
-				.password(passwordEncoder.encode(memberReqDto.getPassword()))
+				.email(signUpReqDto.getEmail())
+				.password(passwordEncoder.encode(signUpReqDto.getPassword()))
 				.build();
 		memberRepository.save(member);
 
 	}
 
-	private void validateMemberSignUpInfo(MemberReqDto memberReqDto) {
-		if(memberRepository.existsByEmail(memberReqDto.getEmail()))
+	private void validateMemberSignUpInfo(SignUpReqDto signUpReqDto) {
+		if(memberRepository.existsByEmail(signUpReqDto.getEmail()))
 			throw new MemberEamilAlreadyExistsException();
-		if(!memberReqDto.getPassword().equals(memberReqDto.getPasswordCheck())){
+		if(!signUpReqDto.getPassword().equals(signUpReqDto.getPasswordCheck())){
 			throw new WrongPasswordCornfirmException();
 		}
 
