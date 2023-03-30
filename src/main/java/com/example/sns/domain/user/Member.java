@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Entity
 @Getter
 @Builder
@@ -20,14 +22,17 @@ public class Member {
 	@Column(nullable = false, unique = true)
 	private String email;
 
+//	@Column(nullable = false, unique = true)
+//	private String nickname;
+
 	@Column(nullable = false)
 	private String password;
 
-	@Column(nullable = false, unique = true)
-	private String nickname;
+//	@Column(nullable = false, unique = true)
+//	private String phone;
 
 //	@Column(nullable = false)
-//	private  birth;
+//	private String birth;
 
 }
 
